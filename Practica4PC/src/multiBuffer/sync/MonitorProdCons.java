@@ -24,8 +24,6 @@ public class MonitorProdCons {
 			almacen.almacenar(p[i]);
 		numDisponibles += num;
 		notifyAll();
-		
-		System.out.println(numDisponibles);
 	}
 
 	public synchronized Producto[] extraer(int num) {
@@ -42,8 +40,6 @@ public class MonitorProdCons {
 			p[i] = almacen.extraer();
 		numDisponibles -= num;
 		notifyAll();
-		
-		System.out.println(numDisponibles);
 		
 		return p;
 	}
