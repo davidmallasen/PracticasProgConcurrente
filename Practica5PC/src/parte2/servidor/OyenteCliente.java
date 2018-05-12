@@ -1,21 +1,18 @@
-package parte2.cliente;
+package parte2.servidor;
 
 import parte2.mensajes.Mensaje;
-import parte2.mensajes.TipoMensaje;
 
 import java.io.*;
-import java.net.InetAddress;
 import java.net.Socket;
 
-public class OyenteServidor extends Thread {
-
-    private Socket os;
+public class OyenteCliente extends Thread{
+    private Socket s;
     private ObjectInputStream fin;
 
-    public OyenteServidor(Socket os) {
+    public OyenteCliente(Socket s) {
         try {
-            this.os = os;
-            fin = new ObjectInputStream(os.getInputStream());
+            this.s = s;
+            this.fin = new ObjectInputStream(s.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -24,17 +21,17 @@ public class OyenteServidor extends Thread {
     @Override
     public void run() {
         Mensaje msj;
-        while (true) {
+        while(true) {
             try {
                 msj = (Mensaje) fin.readObject();
                 switch (msj.getTipo()) {
-                    case CONFIRMACION_CONEXION:
+                    case CONEXION:
                         break;
-                    case CONFIRMACION_LISTA_USUARIOS:
+                    case LISTA_USUARIOS:
                         break;
-                    case EMITIR_FICHERO:
+                    case PEDIR_FICHERO:
                         break;
-                    case PREPARADO_SERVIDOR_CLIENTE:
+                    case PREPARADO_CLIENTE_SERVIDOR:
                         break;
                     default:
                         throw new IllegalArgumentException();
