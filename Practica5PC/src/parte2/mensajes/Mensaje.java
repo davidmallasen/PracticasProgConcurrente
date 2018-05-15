@@ -1,6 +1,7 @@
 package parte2.mensajes;
 
 import javax.naming.OperationNotSupportedException;
+import java.net.InetAddress;
 import java.util.ArrayList;
 
 public abstract class Mensaje {
@@ -28,11 +29,28 @@ public abstract class Mensaje {
     }
 
     public String getNombre() throws OperationNotSupportedException {
-        throw new OperationNotSupportedException();
+        throw new OperationNotSupportedException("getNombre");
     }
 
     public ArrayList<String> getFicheros() throws
             OperationNotSupportedException {
-        throw new OperationNotSupportedException();
+        throw new OperationNotSupportedException("getFicheros");
+    }
+
+    public String getNombreFichero() throws OperationNotSupportedException {
+        throw new OperationNotSupportedException("getNombreFichero");
+    }
+
+    public ArrayList<String> getListaUsuarios() throws
+            OperationNotSupportedException {
+        throw new OperationNotSupportedException("getListaUsuarios");
+    }
+
+    public int getPuerto() throws OperationNotSupportedException {
+        throw new OperationNotSupportedException("getPuerto");
+    }
+
+    public InetAddress getIpServidor() throws OperationNotSupportedException {
+        throw new OperationNotSupportedException("getIpServidor");
     }
 }

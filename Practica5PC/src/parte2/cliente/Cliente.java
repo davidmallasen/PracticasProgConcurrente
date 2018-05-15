@@ -1,16 +1,15 @@
 package parte2.cliente;
 
+import parte2.mensajes.MCerrarConexion;
 import parte2.mensajes.MConexion;
 import parte2.mensajes.MListaUsuarios;
+import parte2.mensajes.MPedirFichero;
 import parte2.servidor.Servidor;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -80,22 +79,39 @@ public class Cliente extends Thread {
             System.out.println("0 - Salir.");
             System.out.println("Introduzca una opcion: ");
             opcion = sc.nextInt();
-
-            switch (opcion) {
-                case 1:
-                    try {
+            try {
+                switch (opcion) {
+                    case 1:
                         fout.writeObject(new MListaUsuarios(nombre, "servidor"));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case 2:
-                    break;
-                case 0:
-                    break;
-                default:
-                    System.out.println("Error. Opcion no reconocida.");
+                        break;
+                    case 2:
+                        System.out.println("Introduzca el nombre del fichero: ");
+                        String nFich = sc.nextLine();
+                        fout.writeObject(new MPedirFichero(nombre,
+                                "servidor", nFich));
+                        break;
+                    case 0:
+                        fout.writeObject(new MCerrarConexion(nombre, "servidor"));
+                        s.close();
+                        fout.close();
+                        sc.close();
+                        System.out.println("Conexion con el servidor cerrada.");
+                        break;
+                    default:
+                        System.out.println("Error. Opcion no reconocida.");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    s.close();
+                    fout.close();
+                    sc.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+            System.out.println("==============================");
         } while (opcion != 0);
     }
 }

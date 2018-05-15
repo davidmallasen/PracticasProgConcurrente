@@ -20,6 +20,8 @@ public class Servidor extends Thread {
             e.printStackTrace();
         }
         this.usuarios = new ArrayList<>();
+        //LEER DE UN FICHERO USERS.TXT LA INFORMACION DE LOS USUARIOS
+        // REGISTRADOS EN EL SISTEMA
     }
 
     @Override

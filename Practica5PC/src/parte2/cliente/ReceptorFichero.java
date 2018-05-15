@@ -1,4 +1,10 @@
 package parte2.cliente;
 
-public class ReceptorFichero {
+import java.net.InetAddress;
+
+public class ReceptorFichero extends Thread {
+
+    public ReceptorFichero(InetAddress ipServidor, int puerto) {
+
+    }
 }
