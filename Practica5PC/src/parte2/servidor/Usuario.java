@@ -5,18 +5,18 @@ import java.util.ArrayList;
 
 public class Usuario {
 
-    private int idUsuario;
+    private String nombre;
     private InetAddress ip;
     private ArrayList<String> ficheros;
 
-    public Usuario(int idUsuario, InetAddress ip, ArrayList<String> ficheros) {
-        this.idUsuario = idUsuario;
+    public Usuario(String nombre, InetAddress ip, ArrayList<String> ficheros) {
+        this.nombre = nombre;
         this.ip = ip;
         this.ficheros = ficheros;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public String getNombre() {
+        return nombre;
     }
 
     public InetAddress getIp() {

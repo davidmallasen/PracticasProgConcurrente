@@ -1,5 +1,6 @@
 package parte2.mensajes;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 
 public class MConexion extends Mensaje {
@@ -8,7 +9,7 @@ public class MConexion extends Mensaje {
 
     private ArrayList<String> ficheros;
 
-    public MConexion(String origen, String destino, String nombre,
+    public MConexion(InetAddress origen, InetAddress destino, String nombre,
                      ArrayList<String> ficheros) {
         super(TipoMensaje.CONEXION, origen, destino);
         this.nombre = nombre;

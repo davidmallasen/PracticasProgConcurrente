@@ -11,7 +11,7 @@ public class Servidor extends Thread {
 
     private ServerSocket l;
 
-    private ArrayList<Usuario> usuarios;
+    private static ArrayList<Usuario> usuarios = new ArrayList<>();
 
     public Servidor() {
         try {
@@ -19,7 +19,6 @@ public class Servidor extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.usuarios = new ArrayList<>();
         //LEER DE UN FICHERO USERS.TXT LA INFORMACION DE LOS USUARIOS
         // REGISTRADOS EN EL SISTEMA
     }
@@ -34,6 +33,19 @@ public class Servidor extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+
+    protected static void addUsuario(Usuario u) {
+        //Hacer esto safe
+        usuarios.add(u);
+    }
+
+    protected static ArrayList<String> getNombresUsuario() {
+        ArrayList<String> nombres = new ArrayList<>();
+        for (Usuario u : usuarios) {
+            nombres.add(u.getNombre());
+        }
+        return nombres;
     }
 
 }

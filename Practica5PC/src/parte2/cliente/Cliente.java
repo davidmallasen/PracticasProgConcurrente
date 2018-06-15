@@ -26,6 +26,11 @@ public class Cliente extends Thread {
     private InetAddress ip;
 
     /**
+     * Direccion ip del servidor
+     */
+    private InetAddress ipServidor;
+
+    /**
      * Ficheros que proporciona el usuario
      */
     private ArrayList<String> ficheros;
@@ -37,9 +42,10 @@ public class Cliente extends Thread {
     //Comunicacion con el usuario
     private Scanner sc;
 
-    public Cliente(InetAddress ip) {
+    public Cliente(InetAddress ip, InetAddress ipServidor) {
         try {
             this.ip = ip;
+            this.ipServidor = ipServidor;
             this.sc = new Scanner(System.in);
             this.ficheros = new ArrayList<>();
             this.s = new Socket(ip, Servidor.PUERTO_SERVIDOR);
@@ -66,7 +72,7 @@ public class Cliente extends Thread {
         (new OyenteServidor(s)).start();
 
         try {
-            fout.writeObject(new MConexion(nombre, "servidor", nombre, ficheros));
+            fout.writeObject(new MConexion(ip, ipServidor, nombre, ficheros));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -82,16 +88,15 @@ public class Cliente extends Thread {
             try {
                 switch (opcion) {
                     case 1:
-                        fout.writeObject(new MListaUsuarios(nombre, "servidor"));
+                        fout.writeObject(new MListaUsuarios(ip, ipServidor));
                         break;
                     case 2:
                         System.out.println("Introduzca el nombre del fichero: ");
                         String nFich = sc.nextLine();
-                        fout.writeObject(new MPedirFichero(nombre,
-                                "servidor", nFich));
+                        fout.writeObject(new MPedirFichero(ip, ipServidor, nFich));
                         break;
                     case 0:
-                        fout.writeObject(new MCerrarConexion(nombre, "servidor"));
+                        fout.writeObject(new MCerrarConexion(ip, ipServidor));
                         s.close();
                         fout.close();
                         sc.close();

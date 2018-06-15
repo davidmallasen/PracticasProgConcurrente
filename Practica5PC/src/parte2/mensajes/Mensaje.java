@@ -7,10 +7,10 @@ import java.util.ArrayList;
 public abstract class Mensaje {
 
     private TipoMensaje tipo;
-    private String origen;
-    private String destino;
+    private InetAddress origen;
+    private InetAddress destino;
 
-    public Mensaje(TipoMensaje tipo, String origen, String destino) {
+    public Mensaje(TipoMensaje tipo, InetAddress origen, InetAddress destino) {
         this.tipo = tipo;
         this.origen = origen;
         this.destino = destino;
@@ -20,11 +20,11 @@ public abstract class Mensaje {
         return tipo;
     }
 
-    public String getOrigen() {
+    public InetAddress getOrigen() {
         return origen;
     }
 
-    public String getDestino() {
+    public InetAddress getDestino() {
         return destino;
     }
 
@@ -46,11 +46,11 @@ public abstract class Mensaje {
         throw new OperationNotSupportedException("getListaUsuarios");
     }
 
-    public int getPuerto() throws OperationNotSupportedException {
-        throw new OperationNotSupportedException("getPuerto");
-    }
-
     public InetAddress getIpServidor() throws OperationNotSupportedException {
         throw new OperationNotSupportedException("getIpServidor");
+    }
+
+    public int getPuerto() throws OperationNotSupportedException {
+        throw new OperationNotSupportedException("getPuerto");
     }
 }

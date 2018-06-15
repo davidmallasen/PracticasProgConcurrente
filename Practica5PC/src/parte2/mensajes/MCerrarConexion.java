@@ -1,8 +1,10 @@
 package parte2.mensajes;
 
+import java.net.InetAddress;
+
 public class MCerrarConexion extends Mensaje {
 
-    public MCerrarConexion(String origen, String destino) {
+    public MCerrarConexion(InetAddress origen, InetAddress destino) {
         super(TipoMensaje.CERRAR_CONEXION, origen, destino);
     }
 }
